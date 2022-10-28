@@ -16,16 +16,13 @@ using System.Windows.Threading;
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         // This list describes the Bonus Red pieces of Food on the Canvas
-        private List<Point> bonusPoints = new List<Point>();
+        public List<Point> bonusPoints = new List<Point>();
 
         // This list describes the body of the snake on the Canvas
-        private List<Point> snakePoints = new List<Point>();
+        public List<Point> snakePoints = new List<Point>();
 
 
 
@@ -67,13 +64,15 @@ namespace WpfApp1
 
 
 
-        private int length = 100;
-        private int score = 0;
+        public int length = 100;
+        public int score = 0;
         private Random rnd = new Random();
+
+        public DispatcherTimer timer = new DispatcherTimer();
+
         public MainWindow()
         {
             InitializeComponent();
-            DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += new EventHandler(timer_Tick);
 
             /* Here user can change the speed of the snake.
@@ -149,7 +148,7 @@ namespace WpfApp1
                 {
                     length += 10;
                     score += 10;
-
+                    labScore.Content = score;
                     // In the case of food consumption, erase the food object
                     // from the list of bonuses as well as from the canvas
                     bonusPoints.RemoveAt(n);
@@ -223,11 +222,30 @@ namespace WpfApp1
                 snakePoints.RemoveAt(count - length);
             }
         }
-
         private void GameOver()
         {
+            timer.Stop();
             MessageBox.Show("You Lose! Your score is " + score.ToString(), "Game Over", MessageBoxButton.OK, MessageBoxImage.Hand);
-            this.Close();
+            paintCanvas.Children.Clear();
+            snakePoints.Clear();
+            snakePoints.Add(startingPoint);
+            paintSnake(startingPoint);
+            currentPosition = startingPoint;
+            bonusPoints.Clear();
+            if (score != 0)
+            {
+                listScore.Items.Add(score);
+            }
+            score = 0;
+            labScore.Content = score;
+            length = 100;
+            for (int d = 0; d < 10; d++)
+            {
+                paintBonus(d);
+            }
+
+            timer.Start();
         }
+
     }
 }

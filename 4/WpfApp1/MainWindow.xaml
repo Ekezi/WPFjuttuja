@@ -5,14 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Snake!" Height="422" Width="642" ResizeMode="NoResize">
-    <Grid Background="Black">
+        Title="Snake!" Height="422" Width="755.479" ResizeMode="NoResize">
+    <Grid Background="LightGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Canvas Name="paintCanvas" Background="White"
 
-                Grid.Column="1" HorizontalAlignment="Stretch" MaxWidth="642" MaxHeight="422"></Canvas>
+
+
+        <Canvas Name="paintCanvas" Background="White"
+                Grid.Column="1" HorizontalAlignment="Stretch" MaxWidth="642" MaxHeight="422" Margin="52,0,-52,0">
+        </Canvas>
+        <Label x:Name="labScore" Content="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <ListBox x:Name="listScore" Grid.Column="1" HorizontalAlignment="Left" Height="352" Margin="0,31,0,0" VerticalAlignment="Top" Width="47"/>
     </Grid>
 </Window>
