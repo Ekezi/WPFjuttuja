@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:DrawShapes"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    
     <Grid>
 		<Canvas x:Name="drawArea" >
 	    </Canvas>
